@@ -1,0 +1,39 @@
+<!--<&#45;&#45; inside this HTML File We will list toDoList items from firebaseDB
+using the property called toDoList: variable from todoservice class.&ndash;&gt;-->
+
+<!-- but, inside this file we can only access variables from corresponding HTML TypeScript file
+todo.Component.ts, and we don't have any variable like toDoList in the corresponding todo.Component.ts.
+so, in order to access this "toDoList" variable inside this todo.Component.ts file we have to inject todo.Service
+inside the todo.Component.ts for that goto todo.component.ts now-->
+
+
+<!--next todoComponent.ts-->
+<div class="jumbotron" style="padding:45px 0px ">
+  <h4 class="text-center"> To Do List App </h4>
+</div>
+<div class="input-group">
+  <input type="text" class="form-control" #itemTitle>
+  <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)">
+    <i class="fa fa-plus-circle fa-2x"></i>
+  </div>
+</div>
+
+<div style="margin: 5px 0px;">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of toDolistArray">
+        <!-- this is for checked success or not, AlterCheck() will check passed value is true or false. -->
+        <span class="hover-cursor"[class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)" >
+          <i class="fa fa-lg" [ngClass]="item.isChecked? 'fa-check-circle-o':'fa-circle-thin'"></i>
+        </span>
+        <!-- this is for our main data(title) from toDoListArray[]-->
+        {{item.title}}
+
+        <!-- this is for delete -->
+        <span class="hover-cursor text-danger pull-right" (click)="onDelete(item.$key)">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </span>
+      </li>
+    </ul>
+
+</div>
+
